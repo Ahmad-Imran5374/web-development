@@ -1,0 +1,377 @@
+<html>
+<head>
+  <style>
+    /* Style the form */
+    .form {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Style the input fields */
+    .form input, .form select, .form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px 0;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    /* Style the file upload button */
+    .form input[type=file] {
+      display: none;
+    }
+
+    .form .file-label {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px 0;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Style the submit button */
+    .form input[type=submit] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      margin: 10px 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Style the table button */
+    .form input[type=button] {
+      width: 100%;
+      background-color: #2196F3;
+      color: white;
+      padding: 15px;
+      margin: 10px 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Style the error message */
+    .form .error {
+      color: red;
+      font-weight: bold;
+    }
+
+    /* Style the table */
+    .table {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      font-family: Arial, sans-serif;
+      display: none; /* Hide the table by default */
+    }
+
+    .table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th, .table td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    /* Make the table responsive */
+    @media screen and (max-width: 600px) {
+      .table table, .table thead, .table tbody, .table th, .table td, .table tr {
+        display: block;
+      }
+
+      .table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+
+      .table tr {
+        border: 1px solid #ccc;
+      }
+
+      .table td {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        position: relative;
+        padding-left: 50%;
+      }
+
+      .table td:before {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        content: attr(data-column);
+        font-weight: bold;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form">
+    <h1>Job Application Form</h1>
+    <p>Please fill out the form below and click submit when you are done.</p>
+    <form id="application-form" onsubmit="return validateForm()" method="post">
+      <h2>Personal Information</h2>
+      <label for="first-name">First Name</label>
+      <input type="text" id="first-name" name="first-name" required>
+      <label for="last-name">Last Name</label>
+      <input type="text" id="last-name" name="last-name" required>
+      <label for="phone-number">Phone Number</label>
+      <input type="tel" id="phone-number" name="phone-number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" required>
+      <label for="email-address">Email Address</label>
+      <input type="email" id="email-address" name="email-address" placeholder="name@example.com" required>
+      <label for="street">Street</label>
+      <input type="text" id="street" name="street" required>
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" required>
+      <label for="state">State</label>
+      <select id="state" name="state" required>
+        <option value="">Select a state</option>
+        <option value="AL">Alabama</option>
+        <option value="AK">Alaska</option>
+        <option value="AZ">Arizona</option>
+        <option value="AR">Arkansas</option>
+        <option value="CA">California</option>
+        <option value="CO">Colorado</option>
+        <option value="CT">Connecticut</option>
+        <option value="DE">Delaware</option>
+        <option value="DC">District Of Columbia</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="IL">Illinois</option>
+        <option value="IN">Indiana</option>
+        <option value="IA">Iowa</option>
+        <option value="KS">Kansas</option>
+        <option value="KY">Kentucky</option>
+        <option value="LA">Louisiana</option>
+        <option value="ME">Maine</option>
+        <option value="MD">Maryland</option>
+        <option value="MA">Massachusetts</option>
+        <option value="MI">Michigan</option>
+        <option value="MN">Minnesota</option>
+        <option value="MS">Mississippi</option>
+        <option value="MO">Missouri</option>
+        <option value="MT">Montana</option>
+        <option value="NE">Nebraska</option>
+        <option value="NV">Nevada</option>
+        <option value="NH">New Hampshire</option>
+        <option value="NJ">New Jersey</option>
+        <option value="NM">New Mexico</option>
+        <option value="NY">New York</option>
+        <option value="NC">North Carolina</option>
+        <option value="ND">North Dakota</option>
+        <option value="OH">Ohio</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+        <option value="SD">South Dakota</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="UT">Utah</option>
+        <option value="VT">Vermont</option>
+        <option value="VA">Virginia</option>
+        <option value="WA">Washington</option>
+        <option value="WV">West Virginia</option>
+        <option value="WI">Wisconsin</option>
+        <option value="WY">Wyoming</option>
+      </select>
+      <label for="zip-code">ZIP Code</label>
+      <input type="text" id="zip-code" name="zip-code" pattern="[0-9]{5}" placeholder="12345" required>
+      <h2>Resume and Cover Letter</h2>
+      <label for="resume" class="file-label">Upload Resume</label>
+      <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+      <label for="cover-letter">Cover Letter</label>
+      <textarea id="cover-letter" name="cover-letter" rows="10" cols="50" required></textarea>
+      <h2>Education</h2>
+      <label for="education-level">Highest Level of Education Attained</label>
+      <select id="education-level" name="education-level" required>
+        <option value="">Select an option</option>
+        <option value="High School">High School</option>
+        <option value="Associate">Associate</option>
+        <option value="Bachelor">Bachelor</option>
+        <option value="Master">Master</option>
+        <option value="Doctorate">Doctorate</option>
+      </select>
+      <label for="school-name">Name of School/University</label>
+      <input type="text" id="school-name" name="school-name" required>
+      <label for="major">Major/Area of Study</label>
+      <input type="text" id="major" name="major" required>
+      <label for="graduation-year">Graduation Year</label>
+      <input type="number" id="graduation-year" name="graduation-year" min="1900" max="2024" required>
+      <h2>Employment History</h2>
+      <label for=“previous-job”>Previous Job Titles</label>
+      <input type=“text” id=“previous-job” name=“previous-job” required>
+      <label for=“company-name”>Company Names</label>
+      <input type=“text” id=“company-name” name=“company-name” required>
+      <label for=“employment-dates”>Employment Dates</label>
+      <input type=“text” id=“employment-dates” name=“employment-dates” placeholder=“MM/YYYY - MM/YYYY” required>                                                     
+      <label for=“job-responsibilities”>Job Responsibilities</label>
+       <textarea id=“job-responsibilities” name=“job-responsibilities” rows=“5” cols=“50” required></textarea>
+        <h2>Skills</h2>
+        <label for=“skills”>Relevant Skills</label>
+         <input type=“text” id=“skills” name=“skills” placeholder=“e.g., programming languages, software proficiency” required> 
+         <label for=“certifications”>Certifications</label>
+          <input type=“text” id=“certifications” name=“certifications” required> 
+          <h2>Availability</h2> 
+          <label for=“start-date”>Start Date</label> 
+          <input type=“date” id=“start-date” name=“start-date” required> 
+          <label for=“work-schedule”>Preferred Work Schedule</label> 
+          <select id=“work-schedule” name=“work-schedule” required> 
+              <option value=“”>Select an option</option> 
+              <option value=“Full-Time”>Full-Time</option> 
+              <option value=“Part-Time”>Part-Time</option> 
+              <option value=“Flexible”>Flexible</option> 
+              </select> 
+              <label for=“relocate”>Willingness to Relocate</label> 
+              <select id=“relocate” name=“relocate” required> 
+                  
+                  <option value=“”>Select an option</option> 
+                  <option value=“Yes”>Yes</option> 
+                  <option value=“No”>No</option> 
+                  
+                 <optionvalue=“Maybe”>Maybe</option> 
+                  
+           </select> 
+                  <h2>References</h2> 
+                  <label for=“reference-name”>Reference Name</label> 
+                  
+                  <input type=“text” id=“reference-name” name=“reference-name” required> 
+                  <label for=“reference-contact”>Reference Contact Information</label> 
+                  <input type=“text” id=“reference-contact” name=“reference-contact” required> 
+                  <label for=“reference-relationship”>Relationship to Applicant</label> 
+                  <input type=“text” id=“reference-relationship” name=“reference-relationship” required> <h2>Additional Questions</h2> 
+                  <label for=“reason”>Why do you want to work for this company?</label> 
+                  <textarea id=“reason” name=“reason” rows=“5” cols=“50” required></textarea> 
+                  <h2>Consent and Agreement</h2> 
+                  <input type=“checkbox” id=“terms” name=“terms” required> 
+                  <label for=“terms”>I agree to the terms and conditions</label> 
+                  <input type=“checkbox” id=“privacy” name=“privacy” required> 
+                  <label for=“privacy”>I acknowledge the privacy policy</label> 
+                  <input type=“submit” id=“submit” name=“submit” value=“Submit Application”> 
+                  <input type=“button” id=“table” name=“table” value=“View Applications as Table” onclick=“showTable()”> 
+                  <p id=“error” class=“error”></p> 
+                  </form> 
+                  </div> 
+                  <div class=“table”> 
+                      <h1>Submitted Applications</h1> 
+                      <table id=“application-table”> <thead> 
+                          <tr> 
+                              <th>Name</th> 
+                              <th>Email</th> 
+                              <th>Phone Number</th> 
+                              <th>Resume</th> 
+                              <th>Cover Letter</th>
+                          </tr>
+     
+       </thead>
+       <tbody>
+       </tbody>
+      </table>
+       </div>
+        <script>
+          var applications = [];
+
+        function validateForm() { // Get the form element var form = document.getElementById(“application-form”);
+
+        var error = document.getElementById(“error”);
+
+        error.innerHTML = “”;
+
+for(var i = 0; i < form.elements.length; i++) { var input = form.elements[i];
+
+if (input.required) {
+ 
+  if (input.value == "" || input.validity.valid == false) {
+    error.innerHTML = "Please fill out all the required fields correctly.";
+
+    return false;
+  }
+}
+
+}
+
+processData();
+
+return false; }
+
+ function processData() { var form = document.getElementById(“application-form”);
+
+var application = {};
+
+for(var i = 0; i < form.elements.length; i++) { var input = form.elements[i];
+
+
+if (input.type != "button" && input.type != "submit") {
+  
+  application[input.name] = input.value;
+}
+
+}
+
+applications.push(application);
+console.log(application);
+
+form.reset();
+
+alert(“Your application has been submitted successfully.”); }
+
+function showTable() { var table = document.getElementById(“application-table”);
+
+var tbody = table.getElementsByTagName(“tbody”)[0];
+
+// Clear any previous table rows tbody.innerHTML = “”;
+
+for (var i = 0; i < applications.length; i++) { // Get the current application object var application = applications[i];
+
+// Create a table row element
+var tr = document.createElement("tr");
+
+// Create table cells for each field
+var tdName = document.createElement("td");
+var tdEmail = document.createElement("td");
+var tdPhone = document.createElement("td");
+var tdResume = document.createElement("td");
+var tdCover = document.createElement("td");
+
+tdName.setAttribute("data-column", "Name");
+tdEmail.setAttribute("data-column", "Email");
+tdPhone.setAttribute("data-column", "Phone Number");
+tdResume.setAttribute("data-column", "Resume");
+tdCover.setAttribute("data-column", "Cover Letter");
+
+// Set the text content of each cell
+tdName.textContent = application["first-name"] + " " + application["last-name"];
+tdEmail.textContent = application["email-address"];
+tdPhone.textContent = application["phone-number"];
+tdResume.textContent = application["resume"];
+tdCover.textContent = application["cover-letter"];
+
+// Append the cells to the row
+tr.appendChild(tdName);
+tr.appendChild(tdEmail);
+tr.appendChild(tdPhone);
+tr.appendChild(tdResume);
+tr.appendChild(tdCover);
+
+tbody.appendChild(tr);
+
+}
+
+var tableContainer = document.getElementsByClassName(“table”)[0];
+
+ tableContainer.style.display = “block”; } </script> </body> </html>
+
